@@ -102,14 +102,8 @@ public class PocketSphinxActivity extends Activity implements RecognitionListene
         // Recognizer initialization is a time-consuming and it involves IO,
         // so we execute it in async task
         new SetupTask(this).execute();
-
-        findViewById(R.id.clear_seceen).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                ((TextView) findViewById(R.id.result_text)).setText("");
-            }
-        });
     }
+
 
     private static class SetupTask extends AsyncTask<Void, Void, Exception> {
         WeakReference<PocketSphinxActivity> activityReference;
@@ -196,16 +190,24 @@ public class PocketSphinxActivity extends Activity implements RecognitionListene
     /**
      * This callback is called when we stop the recognizer.
      */
+    int count = 1;
+
     @Override
     public void onResult(Hypothesis hypothesis) {
         if (hypothesis != null) {
             String text = hypothesis.getHypstr();
             if (text.equals(KEYPHRASE)) {
+
                 StringBuffer str = new StringBuffer();
-                str.append(((TextView) findViewById(R.id.result_text)).getText().toString());
-                str.append("\n");
-                str.append(text);
+                if (count <= 10) {
+                    str.append(((TextView) findViewById(R.id.result_text)).getText().toString());
+                    str.append("\n");
+                } else {
+                    count = 1;
+                }
+                str.append(count + ":" + text);
                 ((TextView) findViewById(R.id.result_text)).setText(str.toString());
+                count++;
             }
             //makeText(getApplicationContext(), text, Toast.LENGTH_SHORT).show();
         }

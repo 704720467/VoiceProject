@@ -31,11 +31,4 @@
         </LinearLayout>
     </ScrollView>
 
-    <Button
-        android:id="@+id/clear_seceen"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:text="CLear Screen" />
-
 </LinearLayout>
