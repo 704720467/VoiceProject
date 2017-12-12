@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+          package="com.zp.voicedistinguish">
+
+    <uses-sdk
+        android:minSdkVersion="15"
+        android:targetSdkVersion="25"/>
+
+    <instrumentation
+        android:name="android.test.InstrumentationTestRunner"
+        android:label="Tests for com.baidu.speech.recognizerdemo"
+        android:targetPackage="com.zp.voicedistinguish"/>
+    <!-- begin: baidu speech sdk  权限 -->
+    <uses-permission android:name="android.permission.RECORD_AUDIO"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/> <!-- end: baidu speech sdk  权限 -->
+    <application
+        android:name=".ui.SimpleTransApplication"
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <meta-data
+            android:name="com.baidu.speech.APP_ID"
+            android:value="10485393"/>
+        <meta-data
+            android:name="com.baidu.speech.API_KEY"
+            android:value="ojSrWja1mINuyKn49q1jDV2X"/>
+        <meta-data
+            android:name="com.baidu.speech.SECRET_KEY"
+            android:value="22b3bc789710b095adabfb616d67738f"/>
+
+        <service
+            android:name="com.baidu.speech.VoiceRecognitionService"
+            android:exported="false"/>
+
+        <activity android:name=".activity.MainActivity">
+
+        </activity>
+        <activity
+            android:name=".activity.ActivityWakeUp"
+            android:configChanges="orientation|keyboardHidden|screenLayout"
+            android:label="唤醒词"
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+
+                <category android:name="com.baidu.speech.recognizerdemo.intent.category.SAMPLE_CODE"/>
+            </intent-filter>
+        </activity>
+        <activity android:name=".activity.Main2Activity">
+
+        </activity>
+        <activity android:name=".activity.PocketSphinxActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+        </activity>
+    </application>
+
+</manifest>
