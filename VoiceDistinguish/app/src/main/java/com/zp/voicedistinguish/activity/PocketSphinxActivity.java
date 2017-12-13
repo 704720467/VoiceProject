@@ -65,11 +65,11 @@ public class PocketSphinxActivity extends Activity implements RecognitionListene
     private static final String KWS_SEARCH2 = "robot";
     //    private static final String FORECAST_SEARCH = "forecast";
     //    private static final String DIGITS_SEARCH = "digits";
-    //    private static final String PHONE_SEARCH = "phones";
-    //    private static final String MENU_SEARCH = "menu";
+    private static final String PHONE_SEARCH = "phones";
+    private static final String MENU_SEARCH = "menu";
 
     /* Keyword we are looking for to activate menu */
-    private static final String KEYPHRASE = "hello";
+    private static final String KEYPHRASE = "hello robot";
     private static final String KEYPHRASE2 = "robot";
 
     /* Used to handle permission request */
@@ -86,7 +86,7 @@ public class PocketSphinxActivity extends Activity implements RecognitionListene
         // Prepare the data for UI
         captions = new HashMap<>();
         captions.put(KWS_SEARCH, R.string.kws_caption);
-        captions.put(KWS_SEARCH2, R.string.kws_caption2);
+//        captions.put(KWS_SEARCH2, R.string.kws_caption2);
         //        captions.put(DIGITS_SEARCH, R.string.digits_caption);
         //        captions.put(PHONE_SEARCH, R.string.phone_caption);
         //        captions.put(FORECAST_SEARCH, R.string.forecast_caption);
@@ -180,7 +180,7 @@ public class PocketSphinxActivity extends Activity implements RecognitionListene
         //            switchSearch(FORECAST_SEARCH);
         //        else
 //        if (text.equals(KEYPHRASE)) {
-        switchSearch(KWS_SEARCH);
+        switchSearch(MENU_SEARCH);
 //            ((TextView) findViewById(R.id.result_text)).setText(text);
 //        }else{
 //            switchSearch(KWS_SEARCH);
@@ -235,8 +235,8 @@ public class PocketSphinxActivity extends Activity implements RecognitionListene
         else
             recognizer.startListening(searchName, 10000);
 
-        String caption = getResources().getString(captions.get(searchName));
-        ((TextView) findViewById(R.id.caption_text)).setText(caption);
+//        String caption = getResources().getString(captions.get(searchName));
+//        ((TextView) findViewById(R.id.caption_text)).setText(caption);
     }
 
     private void setupRecognizer(File assetsDir) throws IOException {
@@ -259,8 +259,8 @@ public class PocketSphinxActivity extends Activity implements RecognitionListene
 //        recognizer.addKeyphraseSearch(KWS_SEARCH2, KEYPHRASE);
 
         // Create grammar-based search for selection between demos
-        //        File menuGrammar = new File(assetsDir, "menu.gram");
-        //        recognizer.addGrammarSearch(MENU_SEARCH, menuGrammar);
+        File menuGrammar = new File(assetsDir, "menu.gram");
+        recognizer.addGrammarSearch(MENU_SEARCH, menuGrammar);
         //
         //        // Create grammar-based search for digit recognition
         //        File digitsGrammar = new File(assetsDir, "digits.gram");
@@ -270,9 +270,9 @@ public class PocketSphinxActivity extends Activity implements RecognitionListene
         //        File languageModel = new File(assetsDir, "weather.dmp");
         //        recognizer.addNgramSearch(FORECAST_SEARCH, languageModel);
         //
-        //        // Phonetic search
-        //        File phoneticModel = new File(assetsDir, "en-phone.dmp");
-        //        recognizer.addAllphoneSearch(PHONE_SEARCH, phoneticModel);
+        // Phonetic search
+//        File phoneticModel = new File(assetsDir, "en-phone.dmp");
+//        recognizer.addAllphoneSearch(PHONE_SEARCH, phoneticModel);
     }
 
     @Override
